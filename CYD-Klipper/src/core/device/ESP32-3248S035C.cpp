@@ -6,12 +6,12 @@
 #include "../../conf/global_config.h"
 #include "../lv_setup.h"
 
-#define TOUCH_SDA  33
-#define TOUCH_SCL  32
+#define TOUCH_SDA 33
+#define TOUCH_SCL 32
 #define TOUCH_INT 21
 #define TOUCH_RST 25
-#define TOUCH_WIDTH 320
-#define TOUCH_HEIGHT 480
+#define TOUCH_WIDTH CYD_SCREEN_WIDTH_PX
+#define TOUCH_HEIGHT CYD_SCREEN_HEIGHT_PX
 
 #define LED_PIN_R 4
 #define LED_PIN_G 16
@@ -102,24 +102,25 @@ void screen_setup()
 {
     // Initialize the touchscreen
     tp.begin();
-    tp.setRotation(ROTATION_NORMAL);
     // Initialize LVGL
     lv_init();
     // Initialize the display
     tft.init();
     ledcSetup(0, 5000, 12);
     ledcAttachPin(TFT_BL, 0);
-    tft.setRotation(global_config.rotateScreen ? 3 : 1);
+    // tft.setRotation(6); tp.setRotation(ROTATION_RIGHT);
+    tp.setRotation(ROTATION_INVERTED);
+    tft.setRotation(7);
     tft.fillScreen(TFT_BLACK);
     set_screen_brightness();
     set_invert_display();
     LED_init();
 
-    lv_disp_draw_buf_init(&draw_buf, buf, NULL, TFT_WIDTH * TFT_HEIGHT / 10);
+    lv_disp_draw_buf_init(&draw_buf, buf, NULL, CYD_SCREEN_WIDTH_PX * CYD_SCREEN_HEIGHT_PX / 10);
     static lv_disp_drv_t disp_drv;
     lv_disp_drv_init(&disp_drv);
-    disp_drv.hor_res = TFT_HEIGHT;
-    disp_drv.ver_res = TFT_WIDTH;
+    disp_drv.hor_res = CYD_SCREEN_HEIGHT_PX;
+    disp_drv.ver_res = CYD_SCREEN_WIDTH_PX;
     disp_drv.flush_cb = screen_lv_flush;
     disp_drv.draw_buf = &draw_buf;
     lv_disp_drv_register(&disp_drv);

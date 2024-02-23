@@ -87,7 +87,7 @@ void create_button(const char* icon, const char* name, lv_event_cb_t button_clic
     lv_obj_t* label = lv_label_create(btn);
     lv_label_set_text(label, icon);
     lv_obj_align(label, LV_ALIGN_CENTER, 0, -1 * CYD_SCREEN_GAP_PX);
-    
+
     label = lv_label_create(btn);
     lv_label_set_text(label, name);
     lv_obj_align(label, LV_ALIGN_CENTER, 0, CYD_SCREEN_GAP_PX);
@@ -101,7 +101,7 @@ void nav_buttons_setup(unsigned char active_panel){
     lv_obj_clear_flag(lv_scr_act(), LV_OBJ_FLAG_SCROLLABLE);
 
     lv_obj_t * root_panel = lv_create_empty_panel(lv_scr_act());
-    lv_obj_set_size(root_panel, CYD_SCREEN_SIDEBAR_SIZE_PX, CYD_SCREEN_HEIGHT_PX); 
+    lv_obj_set_size(root_panel, CYD_SCREEN_SIDEBAR_SIZE_PX, CYD_SCREEN_WIDTH_PX); 
     lv_obj_align(root_panel, LV_ALIGN_TOP_LEFT, 0, 0);
     lv_layout_flex_column(root_panel, LV_FLEX_ALIGN_START, 0, 0);
 

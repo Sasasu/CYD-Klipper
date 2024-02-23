@@ -9,7 +9,7 @@
 #endif
 
 #define CYD_SCREEN_PANEL_WIDTH_PX \
-    (CYD_SCREEN_WIDTH_PX - CYD_SCREEN_SIDEBAR_SIZE_PX)
+    (CYD_SCREEN_HEIGHT_PX - CYD_SCREEN_SIDEBAR_SIZE_PX)
 
 typedef struct {
     lv_event_cb_t event;
