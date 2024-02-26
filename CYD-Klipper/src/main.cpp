@@ -19,7 +19,6 @@ void setup() {
     Serial.println("Screen init done");
     
     wifi_init();
-    ota_init();
     ip_init();
     data_setup();
 
@@ -33,9 +32,4 @@ void loop(){
     data_loop();
     lv_timer_handler();
     lv_task_handler();
-
-    if (is_ready_for_ota_update())
-    {
-        ota_do_update();
-    }
 }
