@@ -20,7 +20,10 @@
 TAMC_GT911 tp = TAMC_GT911(TOUCH_SDA, TOUCH_SCL, TOUCH_INT, TOUCH_RST, TOUCH_WIDTH, TOUCH_HEIGHT);
 
 static lv_disp_draw_buf_t draw_buf;
-static lv_color_t buf[CYD_SCREEN_HEIGHT_PX * CYD_SCREEN_WIDTH_PX / 10];
+
+#define VIDEO_MEMORY_SZ (CYD_SCREEN_HEIGHT_PX * CYD_SCREEN_WIDTH_PX / 2)
+static lv_color_t *buf = NULL;
+static lv_color_t *dma_buf = NULL;
 
 TFT_eSPI tft = TFT_eSPI();
 
@@ -38,10 +41,10 @@ void screen_lv_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *col
     uint32_t w = (area->x2 - area->x1 + 1);
     uint32_t h = (area->y2 - area->y1 + 1);
 
-    tft.startWrite();
+    // tft.startWrite();
     tft.setAddrWindow(area->x1, area->y1, w, h);
     tft.pushColors((uint16_t *)&color_p->full, w * h, true);
-    tft.endWrite();
+    // tft.endWrite();
 
     lv_disp_flush_ready(disp);
 }
@@ -116,12 +119,15 @@ void screen_setup()
     set_invert_display();
     LED_init();
 
-    lv_disp_draw_buf_init(&draw_buf, buf, NULL, CYD_SCREEN_WIDTH_PX * CYD_SCREEN_HEIGHT_PX / 10);
+    buf = (lv_color_t*)malloc(sizeof(lv_color_t) * VIDEO_MEMORY_SZ);
+    dma_buf = (lv_color_t *)malloc(sizeof(lv_color_t) * VIDEO_MEMORY_SZ);
+    lv_disp_draw_buf_init(&draw_buf, buf, dma_buf, VIDEO_MEMORY_SZ);
     static lv_disp_drv_t disp_drv;
     lv_disp_drv_init(&disp_drv);
     disp_drv.hor_res = CYD_SCREEN_HEIGHT_PX;
     disp_drv.ver_res = CYD_SCREEN_WIDTH_PX;
     disp_drv.flush_cb = screen_lv_flush;
+    disp_drv.full_refresh = 1;
     disp_drv.draw_buf = &draw_buf;
     lv_disp_drv_register(&disp_drv);
 

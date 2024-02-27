@@ -16,9 +16,9 @@
         "-DTFT_DC=2",
         "-DTFT_RST=-1",
         "-DLOAD_GCLD=1",
-        "    -DSPI_FREQUENCY=300000000",
-        "-DSPI_READ_FREQUENCY=25000000",
-        "-DSPI_TOUCH_FREQUENCY=2500000",
+        "     -DSPI_FREQUENCY=90000000",
+        "-DSPI_READ_FREQUENCY=90000000",
+        "-DSPI_TOUCH_FREQUENCY=90000000",
         "-DTOUCH_CS=-1",
 
         "-DCYD_SCREEN_HEIGHT_PX=320",
@@ -54,7 +54,7 @@
     "name": "esp32-3248S035C",
     "upload": {
       "flash_size": "4MB",
-      "maximum_ram_size": 327680,
+      "maximum_ram_size": 532480,
       "maximum_size": 4194304,
       "require_upload_port": true,
       "speed": 460800
