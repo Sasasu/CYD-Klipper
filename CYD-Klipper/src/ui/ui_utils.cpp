@@ -33,9 +33,9 @@ void destroy_event_user_data(lv_event_t * e){
 }
 
 void lv_create_fullscreen_button_matrix_popup(lv_obj_t * root, lv_event_cb_t title, lv_button_column_t* columns, int column_count){
-    const auto full_panel_width = CYD_SCREEN_WIDTH_PX - CYD_SCREEN_GAP_PX * 3;
+    const auto full_panel_width = CYD_SCREEN_HEIGHT_PX - CYD_SCREEN_GAP_PX * 3;
     const auto full_panel_inner_width = full_panel_width - CYD_SCREEN_GAP_PX * 2 - 4;
-    const auto full_panel_height = CYD_SCREEN_HEIGHT_PX - CYD_SCREEN_GAP_PX;
+    const auto full_panel_height = CYD_SCREEN_WIDTH_PX - CYD_SCREEN_GAP_PX;
     const auto full_panel_inner_height = full_panel_height - CYD_SCREEN_GAP_PX * 2 - 4;
     auto column_width = full_panel_inner_width / column_count - CYD_SCREEN_GAP_PX;
     auto column_height = full_panel_inner_height - CYD_SCREEN_GAP_PX - CYD_SCREEN_MIN_BUTTON_HEIGHT_PX;
